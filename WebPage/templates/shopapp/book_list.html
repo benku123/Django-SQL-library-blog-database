@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block start %}
+    <style>
+        body{
+            background-color: #FFFAF0;
+        }
+        .card-img{
+       width: 100%!important;
+       height: 200px!important;
+       object-fit: cover;
+    }
+    </style>
+{% endblock %}
+{% block content %}
+     <div class="container">
+         <div class="row">
+             {% for object in object_list %}
+                 <div class="col-4">
+                     <div class="card" style="width: 18rem;">
+                          <img style="height: 250px" class="card-img-top" src="{{ object.img.url }}" alt="Card image cap">
+                          <div class="card-body">
+                              <h5 class="card-title"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h5>
+                                <p class="card-text">{{ object.content|truncatechars:40 }}</p>
+                              <p>
+                                    <span><i class="fas fa-eye ml-2"></i>{{ object.get_view_count }}</span>
+                                    <span><i class="fas fa-comments ml-2"></i>{{ object.get_comment_count }}</span>
+                                    <span><i class="fas fa-thumbs-up fa-lg"></i>{{ object.get_like_count }}</span>
+                                </p>
+                          </div>
+                     </div>
+
+                 </div>
+             {% endfor %}
+         </div>
+     </div>
+{% endblock %}
